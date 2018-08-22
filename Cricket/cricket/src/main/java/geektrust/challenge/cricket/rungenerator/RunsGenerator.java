@@ -1,7 +1,7 @@
 /**
  * 
  */
-package geektrust.challenge.cricket.RunGenerator;
+package geektrust.challenge.cricket.rungenerator;
 
 /**
  * @author Padmanabhan M
@@ -9,5 +9,5 @@ package geektrust.challenge.cricket.RunGenerator;
  */
 public interface RunsGenerator {
 
-	public Integer generateRun();
+	abstract Integer generateRun();
 }

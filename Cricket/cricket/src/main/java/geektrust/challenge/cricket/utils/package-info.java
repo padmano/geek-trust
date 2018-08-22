@@ -5,4 +5,4 @@
  * @author Padmanabhan M
  *
  */
-package geektrust.challenge.cricket.Player;
+package geektrust.challenge.cricket.utils;

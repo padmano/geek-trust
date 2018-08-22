@@ -1,7 +1,7 @@
 /**
  * 
  */
-package geektrust.challenge.cricket.Player;
+package geektrust.challenge.cricket.player;
 
 /**
  * @author Padmanabhan M
@@ -112,6 +112,13 @@ public class PlayerProbability {
 	 */
 	public void setWicket(Integer wicket) {
 		this.wicket = wicket;
+	}
+	/**
+	 * @return
+	 */
+	public Integer generateRun() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

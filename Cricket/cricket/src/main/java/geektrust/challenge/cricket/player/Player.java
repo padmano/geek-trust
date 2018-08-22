@@ -1,9 +1,9 @@
 /**
  * 
  */
-package geektrust.challenge.cricket.Player;
+package geektrust.challenge.cricket.player;
 
-import geektrust.challenge.cricket.RunGenerator.Runs;
+import geektrust.challenge.cricket.rungenerator.Runs;
 
 /**
  * @author Padmanabhan M
@@ -14,6 +14,11 @@ public class Player extends Runs{
 	private String name;
 	private String handedness;
 	private String nature;
+	
+	private Integer totalBallsFaced;
+	private Integer totalRunsScored;
+	
+	private Boolean isOut;
 	
 	/**
 	 * 
@@ -68,5 +73,41 @@ public class Player extends Runs{
 	 */
 	public void setNature(String nature) {
 		this.nature = nature;
+	}
+	/**
+	 * @return the totalBallsFaced
+	 */
+	public Integer getTotalBallsFaced() {
+		return totalBallsFaced;
+	}
+	/**
+	 * @param totalBallsFaced the totalBallsFaced to set
+	 */
+	public void setTotalBallsFaced(Integer totalBallsFaced) {
+		this.totalBallsFaced = totalBallsFaced;
+	}
+	/**
+	 * @return the totalRunsScored
+	 */
+	public Integer getTotalRunsScored() {
+		return totalRunsScored;
+	}
+	/**
+	 * @param totalRunsScored the totalRunsScored to set
+	 */
+	public void setTotalRunsScored(Integer totalRunsScored) {
+		this.totalRunsScored = totalRunsScored;
+	}
+	/**
+	 * @return the isOut
+	 */
+	public Boolean getIsOut() {
+		return isOut;
+	}
+	/**
+	 * @param isOut the isOut to set
+	 */
+	public void setIsOut(Boolean isOut) {
+		this.isOut = isOut;
 	}
 }
