@@ -3,7 +3,7 @@
  */
 package geektrust.challenge.cricket.rungenerator;
 
-import geektrust.challenge.cricket.player.PlayerProbability;
+import geektrust.challenge.cricket.pojo.PlayerProbability;
 
 /**
  * @author Padmanabhan M
