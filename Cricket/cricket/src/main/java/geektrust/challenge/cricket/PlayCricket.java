@@ -51,15 +51,6 @@ public class PlayCricket {
 				else 
 					System.out.println("\nLengaluru Lost");
 			}
-			
-			
-			
-			/*
-			 * for (int i = 0; i < afterMatch.size(); i++) { Player player =
-			 * afterMatch.get(i); System.out.println(player.getName() + " " +
-			 * player.getTotalRunsScored() + (player.getIsOut() ? "" : "*") + "(" +
-			 * player.getTotalBallsFaced() + ")"); }
-			 */
 
 		} catch (Exception e) {
 			e.printStackTrace();

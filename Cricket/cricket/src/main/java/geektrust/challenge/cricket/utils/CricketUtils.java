@@ -6,11 +6,11 @@ package geektrust.challenge.cricket.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.json.simple.JSONArray;
@@ -26,9 +26,9 @@ import geektrust.challenge.cricket.pojo.Player;
  *
  */
 public class CricketUtils {
-	
+
 	private static final Logger logger = Logger.getLogger(CricketUtils.class.getName());
-	
+
 	/**
 	 * 
 	 */
@@ -36,63 +36,57 @@ public class CricketUtils {
 		super();
 	}
 
-	/**	Create the PlayerList from JSON file
-	 * 	
+	/**
+	 * Create the PlayerList from JSON file
+	 * 
 	 * @return
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
-	public static Map<Integer, Player> createPlayerList(String fileName) throws FileNotFoundException,FileNotFoundException {
+	public static Map<Integer, Player> createPlayerList(String fileName)
+			throws FileNotFoundException, FieldNotPresentException {
 
 		Map<Integer, Player> playerList = new HashMap<Integer, Player>();
 
-		JSONParser parser = new JSONParser();
 		try {
-			ClassLoader classLoader = CricketUtils.class.getClassLoader();
-			FileReader reader = new FileReader(new File(classLoader.getResource(fileName+".json").getFile()));
-			Object obj = parser.parse(reader);
-			JSONObject playerListJSONObj = (JSONObject) obj;
-			if (playerListJSONObj.containsKey("players"))
+			JSONObject playerListJSONObj = readFromJSONFile(fileName);
 
-			{
-				Integer playerCount = 0;
-				JSONArray playerArray = (JSONArray) playerListJSONObj.get("players");
-				for (Object playerObj : playerArray) {
+			if (playerListJSONObj != null) {
+				if (playerListJSONObj.containsKey("players"))
 
-					playerCount++;
+				{
+					JSONArray playerArray = (JSONArray) playerListJSONObj.get("players");
+					for (Object playerObj : playerArray) {
 
-					JSONObject playerJSONObj = (JSONObject) playerObj;
-					Player player = new Player();
+						JSONObject playerJSONObj = (JSONObject) playerObj;
+						Player player = new Player();
 
-					player.setName((String) playerJSONObj.get("name"));
-					player.setHandedness((String) playerJSONObj.get("handedness"));
-					player.setNature((String) playerJSONObj.get("nature"));
-					player.setBattingOrder(((Long) playerJSONObj.get("battingOrder")).intValue());
-					JSONObject probJSONObj = (JSONObject) playerJSONObj.get("probability");
-					player.setDot(((Long) probJSONObj.get("dot")).intValue());
-					player.setOneRun(((Long) probJSONObj.get("one")).intValue());
-					player.setTwoRuns(((Long) probJSONObj.get("two")).intValue());
-					player.setThreeRuns(((Long) probJSONObj.get("three")).intValue());
-					player.setFourRuns(((Long) probJSONObj.get("four")).intValue());
-					player.setFiveRuns(((Long) probJSONObj.get("five")).intValue());
-					player.setSixRuns(((Long) probJSONObj.get("six")).intValue());
-					player.setWicket(((Long) (probJSONObj.get("wicket"))).intValue());
+						player.setName((String) playerJSONObj.get("name"));
+						player.setHandedness((String) playerJSONObj.get("handedness"));
+						player.setNature((String) playerJSONObj.get("nature"));
+						player.setBattingOrder(((Long) playerJSONObj.get("battingOrder")).intValue());
+						JSONObject probJSONObj = (JSONObject) playerJSONObj.get("probability");
+						player.setDot(((Long) probJSONObj.get("dot")).intValue());
+						player.setOneRun(((Long) probJSONObj.get("one")).intValue());
+						player.setTwoRuns(((Long) probJSONObj.get("two")).intValue());
+						player.setThreeRuns(((Long) probJSONObj.get("three")).intValue());
+						player.setFourRuns(((Long) probJSONObj.get("four")).intValue());
+						player.setFiveRuns(((Long) probJSONObj.get("five")).intValue());
+						player.setSixRuns(((Long) probJSONObj.get("six")).intValue());
+						player.setWicket(((Long) (probJSONObj.get("wicket"))).intValue());
 
-					player.setTotalBallsFaced(0);
-					player.setTotalRunsScored(0);
-					player.setIsOut(Boolean.FALSE);
+						player.setTotalBallsFaced(0);
+						player.setTotalRunsScored(0);
+						player.setIsOut(Boolean.FALSE);
 
-					playerList.put(player.getBattingOrder(), player);
+						playerList.put(player.getBattingOrder(), player);
+					}
+				} else
+					throw new FieldNotPresentException();
+			} else
+				throw new FileNotFoundException();
 
-				}
-			}
-			else
-				throw new FieldNotPresentException("Required Field not Present");
-		}catch(FileNotFoundException e) {
-			logger.log(Level.SEVERE, "File not found", e);
-			throw new FileNotFoundException() ;
-		}
-		catch (Exception e) {
-			logger.log(Level.SEVERE, "Exception occured", e);
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException();
 		}
 
 		/*
@@ -127,65 +121,78 @@ public class CricketUtils {
 
 		return playerList;
 	}
-	
-	/** Create the PlayerList from JSON file
+
+	/**
+	 * Create the PlayerList from JSON file
 	 * 
 	 * @param fileName
 	 * @return MatchDetails
 	 * @throws FileNotFoundException
 	 */
-	public static MatchDetails createMatchDetails(String fileName) throws FileNotFoundException,FieldNotPresentException {
+	public static MatchDetails createMatchDetails(String fileName)
+			throws FileNotFoundException, FieldNotPresentException {
 		MatchDetails matchDetail = new MatchDetails();
-		
-		JSONParser parser = new JSONParser();
-		
 		try {
-			ClassLoader classLoader = CricketUtils.class.getClassLoader();
-			FileReader reader = new FileReader(new File(classLoader.getResource(fileName+".json").getFile()));
-			Object obj = parser.parse(reader);
-			JSONObject matchJSONObj = (JSONObject) obj;
-			
-			if(matchJSONObj.containsKey("matchDetails")) {
-				JSONObject detailJSONObj = (JSONObject) matchJSONObj.get("matchDetails");
-				if(detailJSONObj.containsKey("targetRuns"))
-					matchDetail.setTargetRuns(((Long) detailJSONObj.get("targetRuns")).intValue());
-				if(detailJSONObj.containsKey("targetOvers"))
-					matchDetail.setTargetOvers(((Long) detailJSONObj.get("targetOvers")).intValue());
-				if(detailJSONObj.containsKey("ballsPerOver"))
-					matchDetail.setBallsPerOver(((Long) detailJSONObj.get("ballsPerOver")).intValue());
-				else
+			JSONObject matchJSONObj = readFromJSONFile(fileName);
+			if (matchJSONObj != null) {
+				if (matchJSONObj.containsKey("matchDetails")) {
+					JSONObject detailJSONObj = (JSONObject) matchJSONObj.get("matchDetails");
+					if (detailJSONObj.containsKey("targetRuns"))
+						matchDetail.setTargetRuns(((Long) detailJSONObj.get("targetRuns")).intValue());
+					if (detailJSONObj.containsKey("targetOvers"))
+						matchDetail.setTargetOvers(((Long) detailJSONObj.get("targetOvers")).intValue());
+					if (detailJSONObj.containsKey("ballsPerOver"))
+						matchDetail.setBallsPerOver(((Long) detailJSONObj.get("ballsPerOver")).intValue());
+				} else
 					throw new FieldNotPresentException("Required Field not Present");
-			}
-			else
-				throw new FieldNotPresentException("Required Field not Present");
-	}catch(FileNotFoundException e) {
-			logger.log(Level.SEVERE, "File not found", e);
-			throw new FileNotFoundException() ;
+			} else
+				throw new FileNotFoundException();
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException();
 		}
-		catch (Exception e) {
-			logger.log(Level.SEVERE, "Exception occured", e);
-		}
+
 		return matchDetail;
-	
 	}
-	
-	/** Rotate the strike at the end of the over or scores a 1/3/5
+
+	/**
+	 * Rotate the strike at the end of the over or scores a 1/3/5
 	 * 
 	 * @param striker
 	 * @param nonStriker
 	 */
 	public static List<Player> rotateStrike(Player striker, Player nonStriker) {
 		List<Player> playerList = new ArrayList<Player>();
-		if(striker != null && nonStriker != null) {
+		if (striker != null && nonStriker != null) {
 			Player temp = nonStriker;
 			nonStriker = striker;
 			striker = temp;
 			playerList.add(striker);
 			playerList.add(nonStriker);
-		
+
 		}
-			return playerList;
+		return playerList;
 	}
-}	
 
+	/** Private method to read json file and parse as JSONObject
+	 * 
+	 * @param fileName
+	 * @return JSONObject
+	 */
+	private static JSONObject readFromJSONFile(String fileName) {
+		JSONParser parser = new JSONParser();
+		Object obj = null;
+		try {
+			ClassLoader classLoader = CricketUtils.class.getClassLoader();
+			URL fileURL = classLoader.getResource(fileName + ".json");
+			if (fileURL != null) {
+				File dataFile = new File(fileURL.getFile());
+				FileReader reader = new FileReader(dataFile);
+				obj = parser.parse(reader);
+			} else
+				throw new FileNotFoundException();
+		} catch (Exception e) {
 
+		}
+		return (JSONObject) obj;
+	}
+}

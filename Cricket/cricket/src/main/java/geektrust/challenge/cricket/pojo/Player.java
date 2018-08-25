@@ -123,4 +123,6 @@ public class Player extends Runs{
 	public void setBattingOrder(Integer battingOrder) {
 		this.battingOrder = battingOrder;
 	}
+	
+	
 }

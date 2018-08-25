@@ -129,7 +129,6 @@ public class InningsSimulatorImpl implements InningsSimulator {
 			afterMatch.put(striker.getBattingOrder(), striker);
 			afterMatch.put(nonStriker.getBattingOrder(), nonStriker);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		result.setCommentary(commentaryList);

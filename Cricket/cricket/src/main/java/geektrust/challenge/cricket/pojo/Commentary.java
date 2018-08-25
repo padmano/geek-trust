@@ -140,6 +140,92 @@ public class Commentary {
 	public void setIsOut(Boolean isOut) {
 		this.isOut = isOut;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ball == null) ? 0 : ball.hashCode());
+		result = prime * result + ((isOut == null) ? 0 : isOut.hashCode());
+		result = prime * result + ((isOverSummary == null) ? 0 : isOverSummary.hashCode());
+		result = prime * result + ((player == null) ? 0 : player.hashCode());
+		result = prime * result + ((remainingOver == null) ? 0 : remainingOver.hashCode());
+		result = prime * result + ((remainingRun == null) ? 0 : remainingRun.hashCode());
+		result = prime * result + ((run == null) ? 0 : run.hashCode());
+		return result;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Commentary)) {
+			return false;
+		}
+		Commentary other = (Commentary) obj;
+		if (ball == null) {
+			if (other.ball != null) {
+				return false;
+			}
+		} else if (!ball.equals(other.ball)) {
+			return false;
+		}
+		if (isOut == null) {
+			if (other.isOut != null) {
+				return false;
+			}
+		} else if (!isOut.equals(other.isOut)) {
+			return false;
+		}
+		if (isOverSummary == null) {
+			if (other.isOverSummary != null) {
+				return false;
+			}
+		} else if (!isOverSummary.equals(other.isOverSummary)) {
+			return false;
+		}
+		if (player == null) {
+			if (other.player != null) {
+				return false;
+			}
+		} else if (!player.equals(other.player)) {
+			return false;
+		}
+		if (remainingOver == null) {
+			if (other.remainingOver != null) {
+				return false;
+			}
+		} else if (!remainingOver.equals(other.remainingOver)) {
+			return false;
+		}
+		if (remainingRun == null) {
+			if (other.remainingRun != null) {
+				return false;
+			}
+		} else if (!remainingRun.equals(other.remainingRun)) {
+			return false;
+		}
+		if (run == null) {
+			if (other.run != null) {
+				return false;
+			}
+		} else if (!run.equals(other.run)) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 
