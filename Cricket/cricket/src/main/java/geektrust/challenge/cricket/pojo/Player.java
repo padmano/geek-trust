@@ -5,7 +5,8 @@ package geektrust.challenge.cricket.pojo;
 
 import geektrust.challenge.cricket.rungenerator.Runs;
 
-/**
+/**Main Pojo class for holding player details
+ * 
  * @author Padmanabhan M
  *
  */

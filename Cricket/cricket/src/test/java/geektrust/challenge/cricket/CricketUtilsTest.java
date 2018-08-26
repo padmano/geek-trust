@@ -9,7 +9,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.hamcrest.collection.IsMapContaining;
@@ -54,7 +53,7 @@ public class CricketUtilsTest {
 		String fileName = "player";
 		Map<Integer, Player> playerList = PlayCricketTest.players; 
 
-		/*Player player1 = new Player();
+		Player player1 = new Player();
 		player1.setName("Kirat Boli");
 		player1.setDot(5);
 		player1.setOneRun(30);
@@ -117,29 +116,28 @@ public class CricketUtilsTest {
 		player4.setTotalRunsScored(0);
 		player4.setIsOut(Boolean.FALSE);
 		player4.setBattingOrder(4);
-		playerList.put(player4.getBattingOrder(), player4);*/
+		playerList.put(player4.getBattingOrder(), player4);
 //		  playerList.put(4, player4);
 
-		/*
-		 * //All passed / true
-		 * 
-		 * //1. Test equal, ignore order assertThat(map, is(expected));
-		 * 
-		 * //2. Test size assertThat(map.size(), is(4));
-		 * 
-		 * //3. Test map entry, best! assertThat(map, IsMapContaining.hasEntry("n",
-		 * "node"));
-		 * 
-		 * assertThat(map, not(IsMapContaining.hasEntry("r", "ruby")));
-		 * 
-		 * //4. Test map key assertThat(map, IsMapContaining.hasKey("j"));
-		 * 
-		 * //5. Test map value assertThat(map, IsMapContaining.hasValue("node"));
-		 */
-		/*
-		 * assertThat(playerList,
-		 * IsMapContaining.ha(CricketUtils.createPlayerList(fileName)));
-		 */
+		
+		  //All passed / true
+		  
+		  //1. Test equal, ignore order assertThat(map, is(expected));
+		  
+		  //2. Test size assertThat(map.size(), is(4));
+		  
+		  //3. Test map entry, best! assertThat(map, IsMapContaining.hasEntry("n", "node"));
+		  
+//		  assertThat(map, not(IsMapContaining.hasEntry("r", "ruby")));
+		  
+		  //4. Test map key assertThat(map, IsMapContaining.hasKey("j"));
+		  
+		  //5. Test map value assertThat(map, IsMapContaining.hasValue("node"));
+		 
+		
+		 /* assertThat(playerList,
+		  IsMapContaining.ha(CricketUtils.createPlayerList(fileName)));*/
+		 
 			assertThat(CricketUtils.createPlayerList(fileName).size(), is(playerList.size()));
 	}
 

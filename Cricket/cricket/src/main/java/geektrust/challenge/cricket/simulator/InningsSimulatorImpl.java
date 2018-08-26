@@ -84,14 +84,14 @@ public class InningsSimulatorImpl implements InningsSimulator {
 						continue;
 					} else {
 						afterMatch.put(nonStriker.getBattingOrder(), nonStriker);
-						summary = new Summary(Boolean.FALSE);
+						summary = new Summary(totalRuns,Boolean.FALSE);
 						break;
 					}
 				}
 				comment = new Commentary(currentBall, striker.getName(), currentRun, Boolean.FALSE);
 				commentaryList.add(comment);
 
-				if (totalRuns >= targetRuns) {
+				if (totalRuns > targetRuns) {
 					summary = new Summary(totalRuns, "Lengaluru", (teamSize - playerStrike), (balls - currentBall),
 							Boolean.TRUE);
 
@@ -125,7 +125,7 @@ public class InningsSimulatorImpl implements InningsSimulator {
 					nonStriker = swappedList.get(1);
 				}
 			}
-			
+			summary = new Summary(totalRuns, Boolean.FALSE);
 			afterMatch.put(striker.getBattingOrder(), striker);
 			afterMatch.put(nonStriker.getBattingOrder(), nonStriker);
 		} catch (Exception e) {
@@ -150,6 +150,7 @@ public class InningsSimulatorImpl implements InningsSimulator {
 
 		InningsResult inningsResult = new InningsResult();
 		Commentary comment;
+		Summary summary  = new Summary();
 		List<Commentary> commentaryList = new ArrayList<Commentary>();
 		Map<Integer, Player> playerList = new HashMap<Integer, Player>();
 
@@ -186,6 +187,8 @@ public class InningsSimulatorImpl implements InningsSimulator {
 			if (currentRun < 0) {
 				playerDown++;
 				striker.setIsOut(Boolean.TRUE);
+				comment = new Commentary(striker.getName(), currentBall, Boolean.TRUE);
+				commentaryList.add(comment);
 				playerList.put(striker.getBattingOrder(), striker);
 				if (playerDown <= teamSize) {
 					striker = players.get(playerDown);
@@ -198,7 +201,9 @@ public class InningsSimulatorImpl implements InningsSimulator {
 			}
 			commentaryList.add(comment);
 		}
-
+		summary.setTotalRuns(totalRun);
+		summary.setBallLeft(totalBalls-currentRun);
+		inningsResult.setSummary(summary);
 		inningsResult.setCommentary(commentaryList);
 		inningsResult.setPlayerList(playerList);
 		return inningsResult;

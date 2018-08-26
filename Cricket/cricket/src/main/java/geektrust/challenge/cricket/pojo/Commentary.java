@@ -3,7 +3,8 @@
  */
 package geektrust.challenge.cricket.pojo;
 
-/**
+/**Commentary class for having commentary for each ball.
+ * 
  * @author Padmanabhan M
  *
  */
@@ -33,7 +34,7 @@ public class Commentary {
 	}
 	
 	
-	/**Scores run per ball with player name
+	/** Scores run per ball with player name
 	 * @param player
 	 * @param ball
 	 * @param run
@@ -45,7 +46,7 @@ public class Commentary {
 		this.ball = ball;
 		this.run = run;
 	}
-	/**
+	/** If the batsman is out
 	 * @param player
 	 * @param ball
 	 * @param isOut

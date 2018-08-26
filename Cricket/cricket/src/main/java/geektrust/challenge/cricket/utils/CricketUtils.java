@@ -3,14 +3,14 @@
  */
 package geektrust.challenge.cricket.utils;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.json.simple.JSONArray;
@@ -21,7 +21,8 @@ import geektrust.challenge.cricket.exception.FieldNotPresentException;
 import geektrust.challenge.cricket.pojo.MatchDetails;
 import geektrust.challenge.cricket.pojo.Player;
 
-/**
+/**Cricket utility for creating player list and match details.
+ * 
  * @author Padmanabhan M
  *
  */
@@ -173,26 +174,27 @@ public class CricketUtils {
 		return playerList;
 	}
 
-	/** Private method to read json file and parse as JSONObject
+	/**
+	 * Private method to read json file and parse as JSONObject
 	 * 
 	 * @param fileName
 	 * @return JSONObject
+	 * @throws FileNotFoundException
 	 */
-	private static JSONObject readFromJSONFile(String fileName) {
+	private static JSONObject readFromJSONFile(String fileName) throws FileNotFoundException {
 		JSONParser parser = new JSONParser();
 		Object obj = null;
-		try {
-			ClassLoader classLoader = CricketUtils.class.getClassLoader();
-			URL fileURL = classLoader.getResource(fileName + ".json");
-			if (fileURL != null) {
-				File dataFile = new File(fileURL.getFile());
-				FileReader reader = new FileReader(dataFile);
-				obj = parser.parse(reader);
-			} else
-				throw new FileNotFoundException();
-		} catch (Exception e) {
+		ClassLoader classLoader = CricketUtils.class.getClassLoader();
+		InputStream sam = classLoader.getResourceAsStream(fileName + ".json");
+		if (sam != null)
+			try {
+				obj = parser.parse(new InputStreamReader(sam));
 
-		}
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, "Exception in readFromJSONFile");
+			}
+		else
+			throw new FileNotFoundException();
 		return (JSONObject) obj;
 	}
 }

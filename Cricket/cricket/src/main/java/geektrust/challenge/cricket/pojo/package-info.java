@@ -1,7 +1,8 @@
 /**
  * 
  */
-/**
+/**Package for holding all the pojo classes needed for the Match simulation.
+ * 
  * @author Padmanabhan M
  *
  */

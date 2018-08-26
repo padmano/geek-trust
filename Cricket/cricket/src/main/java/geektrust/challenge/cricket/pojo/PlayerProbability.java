@@ -3,7 +3,8 @@
  */
 package geektrust.challenge.cricket.pojo;
 
-/**
+/**Pojo class for holding run wise probability of each player.
+ * 
  * @author Padmanabhan M
  *
  */

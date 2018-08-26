@@ -3,7 +3,8 @@
  */
 package geektrust.challenge.cricket.exception;
 
-/**
+/**Custom exception for handling exception when a key is no present in the JSON files
+ * 
  * @author Padmanabhan M
  *
  */

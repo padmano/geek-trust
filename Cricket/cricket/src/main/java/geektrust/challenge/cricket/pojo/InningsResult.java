@@ -6,7 +6,7 @@ package geektrust.challenge.cricket.pojo;
 import java.util.List;
 import java.util.Map;
 
-/**
+/** Results class for holding the player details after match, commentary of the entire match and summary. 
  * @author Padmanabhan M
  *
  */

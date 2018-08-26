@@ -3,7 +3,8 @@
  */
 package geektrust.challenge.cricket.thetoss;
 
-/**
+/** Solution for Online Problem
+ * 
  * @author Padmanabhan M
  *
  */

@@ -3,7 +3,8 @@
  */
 package geektrust.challenge.cricket.pojo;
 
-/**
+/** Summary for holding after match results
+ * 
  * @author Padmanabhan M
  *
  */
@@ -54,8 +55,9 @@ public class Summary {
 	/**
 	 * @param isVictory
 	 */
-	public Summary(Boolean isVictory) {
+	public Summary(Integer totalRuns,Boolean isVictory) {
 		super();
+		this.totalRuns = totalRuns;
 		this.isVictory = isVictory;
 	}
 	/**

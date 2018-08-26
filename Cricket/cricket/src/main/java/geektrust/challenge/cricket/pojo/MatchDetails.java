@@ -3,7 +3,8 @@
  */
 package geektrust.challenge.cricket.pojo;
 
-/**
+/**Holds match details like target runs, available overs and balls per over
+ * 
  * @author Padmanabhan M
  *
  */

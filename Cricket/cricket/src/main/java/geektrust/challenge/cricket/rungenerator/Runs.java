@@ -5,7 +5,8 @@ package geektrust.challenge.cricket.rungenerator;
 
 import geektrust.challenge.cricket.pojo.PlayerProbability;
 
-/**
+/**Pojo for implementing run generator
+ * 
  * @author Padmanabhan M
  *
  */
